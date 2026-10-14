@@ -1,0 +1,23 @@
+# ==============================================================================
+# Cloudflare Credentials and Project Configuration Template
+# ==============================================================================
+# Instructions:
+# 1. Copy this file to 'terraform.tfvars' in this folder:
+#    cp terraform.tfvars.example terraform.tfvars
+# 2. Replace the placeholder values below with your real Cloudflare account details.
+# 3. DO NOT commit 'terraform.tfvars' to Git (it is already in .gitignore).
+# ==============================================================================
+
+# Required: Cloudflare API Token (Custom Token with:
+# - Account > Workers Scripts: Edit
+# - Account > Workers KV Storage: Edit
+# - Account > Workers Subdomain: Read/Edit)
+cloudflare_api_token = "replace_with_your_cloudflare_api_token"
+
+# Required: Cloudflare Account ID (Found in Cloudflare Dashboard URL or Overview)
+cloudflare_account_id = "replace_with_your_cloudflare_account_id"
+
+# Optional: Customize Resource Names & Environment
+worker_name       = "student-task-manager"
+kv_namespace_name = "student_tasks"
+environment       = "production"
