@@ -22,6 +22,6 @@ output "environment" {
 }
 
 output "application_url" {
-  description = "Public HTTPS Worker URL format (subdomain configured in Cloudflare Dashboard)"
-  value       = "https://${cloudflare_workers_script.student_task_worker.script_name}.workers.dev"
+  description = "Live Public Application URL"
+  value       = "https://${cloudflare_workers_script.student_task_worker.script_name}.sudhanshugocher11.workers.dev"
 }
