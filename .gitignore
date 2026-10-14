@@ -1,0 +1,32 @@
+# Terraform state files (CRITICAL: Contains infrastructure secrets & state)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+
+# Terraform variable definitions containing sensitive credentials
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Environment and secret files
+.env
+.env.*
+*.pem
+*.key
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Node.js (if any local tooling is used)
+node_modules/
+npm-debug.log
