@@ -1,0 +1,52 @@
+name: "Terraform IaC CI/CD Deployment"
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: "Automated IaC Pipeline"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform
+
+    env:
+      TF_VAR_cloudflare_api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      TF_VAR_cloudflare_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v4
+
+      - name: "Setup Terraform CLI"
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.16.5"
+
+      - name: "Verify Terraform Installation"
+        run: terraform --version
+
+      - name: "Check Terraform Formatting (terraform fmt)"
+        run: terraform fmt -check
+
+      - name: "Initialize Terraform (terraform init)"
+        run: terraform init
+
+      - name: "Validate Configuration (terraform validate)"
+        run: terraform validate
+
+      - name: "Generate Execution Plan (terraform plan)"
+        run: terraform plan -no-color
+
+      - name: "Provision Infrastructure (terraform apply)"
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: terraform apply -auto-approve -no-color
